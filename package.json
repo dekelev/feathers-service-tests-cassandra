@@ -9,7 +9,7 @@
     "feathers-plugin",
     "cassandra"
   ],
-  "licenses": "MIT",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/dekelev/feathers-service-tests-cassandra.git"
