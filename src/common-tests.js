@@ -394,10 +394,10 @@ function common (appProxy, errors, serviceName = 'people', idProp = 'id') {
 
       describe('paginate', () => {
         beforeEach(() =>
-          (app.service(serviceName).paginate = { default: 1, max: 2 })
+          (app.service(serviceName).options.paginate = { default: 1, max: 2 })
         );
 
-        afterEach(() => (app.service(serviceName).paginate = {}));
+        afterEach(() => (app.service(serviceName).options.paginate = undefined));
 
         it('returns paginated object, paginates by default and shows total', () => {
           return app.service(serviceName)
@@ -646,9 +646,12 @@ function common (appProxy, errors, serviceName = 'people', idProp = 'id') {
           };
 
           return app.service(serviceName).patch(null, { [idProp]: 2, name: 'John' }, params)
-            .then(data => {
-              expect(data).to.be.instanceof(Array);
-              expect(data).to.be.empty;
+            .then(() => {
+              throw new Error('Should never get here');
+            }).catch(function (error) {
+              expect(error).to.be.ok;
+              expect(error instanceof errors.NotFound).to.be.ok;
+              expect(error.message).to.equal(`No record found for id 'null'`);
             });
         });
 
@@ -697,9 +700,12 @@ function common (appProxy, errors, serviceName = 'people', idProp = 'id') {
           };
 
           return app.service(serviceName).patch(null, { [idProp]: 999, name: 'John' }, params)
-            .then(data => {
-              expect(data).to.be.instanceof(Array);
-              expect(data).to.be.empty;
+            .then(() => {
+              throw new Error('Should never get here');
+            }).catch(function (error) {
+              expect(error).to.be.ok;
+              expect(error instanceof errors.NotFound).to.be.ok;
+              expect(error.message).to.equal(`No record found for id 'null'`);
             });
         });
       });
