@@ -1,7 +1,7 @@
 {
   "name": "feathers-service-tests-cassandra",
   "description": "A standardized testing harness for Feathers services and Cassandra DB",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/dekelev/feathers-service-tests-cassandra",
   "main": "lib/",
   "keywords": [

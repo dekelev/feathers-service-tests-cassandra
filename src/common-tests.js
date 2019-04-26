@@ -2,15 +2,10 @@
 
 import { expect } from 'chai';
 
-function common (appProxy, errors, serviceName = 'people', idProp = 'id') {
+function common (app, errors, serviceName = 'people', idProp = 'id') {
   describe(`Common tests, ${serviceName} service with` +
     ` '${idProp}' id property`, () => {
     const _ids = {};
-    let app = null;
-
-    before(() => {
-      app = appProxy();
-    });
 
     beforeEach(() =>
       app.service(serviceName).create({
